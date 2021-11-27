@@ -64,14 +64,12 @@ fn pista(zsh: bool) -> String {
 fn pista_minimal(zsh: bool) -> String {
     let cwd = match cwd::cwd() {
         Some(c) => c,
-        None => "[directory does not exist]".color("red"),
+        None => "".color("red"),
     };
     let vcs_tuple = vcs::vcs_status();
     let mut vcs_component = String::new();
     if let Some((branch, status)) = vcs_tuple {
         vcs_component = format!(" [{} {}] ", branch, status);
-    } else {
-        vcs_component.push(' ');
     }
     let venv = venv::get_name();
     let prompt_char = prompt_char::get_char();
